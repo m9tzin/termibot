@@ -8,21 +8,33 @@ export default function Home() {
   const sendMessage = async () => {
     if (!input.trim()) return;
 
+    const userMessage = input;
     // user message
-    setMessages((prev) => [...prev, { role: "user", content: input }]);
+    setMessages((prev) => [...prev, { role: "user", content: userMessage }]);
+    setInput(""); // Clear input immediately
 
-    // call the API
-    const res = await fetch("/api/chat", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ message: input }),
-    });
+    try {
+      // call the API
+      const res = await fetch("/api/chat", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ message: userMessage }),
+      });
 
-    const data = await res.json();
+      const data = await res.json();
 
-    // add the response from the "bot"
-    setMessages((prev) => [...prev, { role: "assistant", content: data.reply }]);
-    setInput("");
+      if (!res.ok) {
+        throw new Error(data.error || "Failed to get response");
+      }
+
+      // add the response from the "bot"
+      setMessages((prev) => [...prev, { role: "assistant", content: data.response }]);
+    } catch (error) {
+      console.error("Error:", error);
+      const errorMessage = `Error: ${error.message}`;
+      
+      setMessages((prev) => [...prev, { role: "assistant", content: errorMessage }]);
+    }
   };
 
   return (
