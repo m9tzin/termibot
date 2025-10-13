@@ -53,26 +53,6 @@ http://localhost:3000
 4. Crie uma nova chave
 5. Copie e cole no arquivo `.env.local`
 
-## 🚀 Deploy no Vercel
-
-1. **Push para GitHub**
-```bash
-git add .
-git commit -m "Initial commit"
-git push origin main
-```
-
-2. **Conecte ao Vercel**
-   - Acesse [vercel.com](https://vercel.com)
-   - Conecte sua conta GitHub
-   - Importe este projeto
-
-3. **Configure as variáveis de ambiente**
-   - No Vercel, vá em Settings > Environment Variables
-   - Adicione: `GROQ_API_KEY` com sua chave
-
-4. **Deploy automático!** 🎉
-
 ## 📦 Tecnologias
 
 - **Next.js 15** - Framework React
