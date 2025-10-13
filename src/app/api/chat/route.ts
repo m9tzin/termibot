@@ -46,7 +46,7 @@ export async function POST(request: Request) {
     console.error("Erro ao gerar resposta:", error);
     console.error("Error details:", JSON.stringify(error, null, 2));
     return NextResponse.json(
-      { error: `Erro interno do servidor: ${error.message}` },
+      { error: `Erro interno do servidor: ${error instanceof Error ? error.message : 'Unknown error'}` },
       { status: 500 }
     );
   }
