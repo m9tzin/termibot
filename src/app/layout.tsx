@@ -13,8 +13,8 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "talk-Bot",
-  description: "talk-Bot",
+  title: "termiBOT :)",
+  description: "termiBOT :)",
 };
 
 export default function RootLayout({
