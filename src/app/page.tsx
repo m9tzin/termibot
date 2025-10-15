@@ -16,6 +16,44 @@ export default function Home() {
     const userMessage = input;
     
     // Check for native commands
+    if (userMessage.toLowerCase() === "neofetch" || userMessage.toLowerCase() === "tech") {
+      setMessages((prev) => [...prev, { role: "user", content: userMessage }]);
+      setInput("");
+      try {
+        const res = await fetch("/api/neofetch", { method: "GET" });
+        const data = await res.json();
+        if (!res.ok || !data.success) {
+          throw new Error(data.error || "Falha ao obter stack");
+        }
+
+        const s = data.stack;
+        const logo = [
+          " _                    _ ____   ___ _____",
+          "| |_ ___ _ __ _ __ _ (_) __ ) / _ \\_   _|",
+          "| __/ _ \\ '__| '_ ` || |  _ \\| | | || |  ",
+          "| ||  __/ |  | | | | | | |_) | |_| || |  ",
+          " \\__\\___|_|  |_| |_| |_|____/ \\___/ |_|  ",
+          "                    :)                   ",
+        ].join("\n");
+
+        let output = `${logo}\n`;
+        output += `\nproject     : ${s.project} (${s.version})`;
+        output += `\nnode        : ${s.runtime.node} (${s.runtime.platform}/${s.runtime.arch})`;
+        output += `\nframework   : Next ${"next"}, React ${"react"}`;
+        output += `\nreact-dom   : ${"react-dom"}`;
+        output += `\ntailwindcss : ${"tailwindcss"}`;
+        output += `\ntypescript  : ${"typescript"}`;
+        output += `\nai sdks     : groq ${"groq-sdk"}, openai ${"openai"}`;
+        output += `\n             : google/gen-ai ${"@google/generative-ai"}`;
+        output += `\ntooling     : eslint ${"eslint"}, eslint-config-next ${"eslint-config-next"}`;
+
+        setMessages((prev) => [...prev, { role: "assistant", content: output }]);
+      } catch (error) {
+        const msg = `Erro ao executar neofetch: ${error instanceof Error ? error.message : 'Unknown error'}`;
+        setMessages((prev) => [...prev, { role: "assistant", content: msg }]);
+      }
+      return;
+    }
     if (userMessage.toLowerCase() === "clear") {
       setMessages([]);
       setInput("");
@@ -26,7 +64,7 @@ export default function Home() {
       setMessages((prev) => [...prev, { role: "user", content: userMessage }]);
       setMessages((prev) => [...prev, { 
         role: "assistant", 
-        content: "Comandos disponíveis:\n• clear - Limpa o terminal\n• help - Mostra esta ajuda\n• Qualquer outra mensagem será enviada para o AI" 
+        content: "Comandos disponíveis:\n• clear - Limpa o terminal\n• help - Mostra esta ajuda\n• neofetch/tech - Mostra tecnologias do projeto\n• Qualquer outra mensagem será enviada para o AI" 
       }]);
       setInput("");
       return;
