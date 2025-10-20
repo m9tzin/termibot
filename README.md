@@ -14,6 +14,7 @@ Um chat bot moderno com interface de terminal autêntica, construído com Next.j
 
 - `clear` - Limpa o terminal
 - `help` - Mostra comandos disponíveis
+- `tech/neofetch`- Mostra as tecnologias utilizadas via UI
 - Qualquer outra mensagem será enviada para o AI
 
 ## 📦 Tecnologias
