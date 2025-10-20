@@ -39,13 +39,13 @@ export default function Home() {
         let output = `${logo}\n`;
         output += `\nproject     : ${s.project} (${s.version})`;
         output += `\nnode        : ${s.runtime.node} (${s.runtime.platform}/${s.runtime.arch})`;
-        output += `\nframework   : Next ${"next"}, React ${"react"}`;
-        output += `\nreact-dom   : ${"react-dom"}`;
-        output += `\ntailwindcss : ${"tailwindcss"}`;
-        output += `\ntypescript  : ${"typescript"}`;
-        output += `\nai sdks     : groq ${"groq-sdk"}, openai ${"openai"}`;
-        output += `\n             : google/gen-ai ${"@google/generative-ai"}`;
-        output += `\ntooling     : eslint ${"eslint"}, eslint-config-next ${"eslint-config-next"}`;
+        output += `\nframework   : Next ${s.framework.next}, React ${s.framework.react}`;
+        output += `\nreact-dom   : ${s.framework["react-dom"]}`;
+        output += `\ntailwindcss : ${s.framework.tailwindcss}`;
+        output += `\ntypescript  : ${s.framework.typescript}`;
+        output += `\nai sdks     : groq ${s.ai_sdks["groq-sdk"]}, openai ${s.ai_sdks.openai}`;
+        output += `\n             : google/gen-ai ${s.ai_sdks["@google/generative-ai"]}`;
+        output += `\ntooling     : eslint ${s.tooling.eslint}, eslint-config-next ${s.tooling["eslint-config-next"]}`;
 
         setMessages((prev) => [...prev, { role: "assistant", content: output }]);
       } catch (error) {
