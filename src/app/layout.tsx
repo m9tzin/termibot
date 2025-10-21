@@ -15,6 +15,11 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   title: "termiBOT :)",
   description: "termiBOT :)",
+  icons: {
+    icon: "/icons/bot-svgrepo-com.svg",
+    shortcut: "/icons/bot-svgrepo-com.svg",
+    apple: "/icons/bot-svgrepo-com.svg",
+  },
 };
 
 export default function RootLayout({
