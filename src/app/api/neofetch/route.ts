@@ -3,7 +3,7 @@ import path from "path";
 import fs from "fs";
 
 export async function GET() {
-  try {
+try {
     const projectRoot = process.cwd();
     const pkgPath = path.join(projectRoot, "package.json");
 
@@ -14,39 +14,39 @@ export async function GET() {
     const devDependencies = pkg.devDependencies || {};
 
     const stack = {
-      project: pkg.name || "unknown",
-      version: pkg.version || "unknown",
-      runtime: {
+    project: pkg.name || "termibot",
+    version: pkg.version || "0.1.3",
+    runtime: {
         node: process.versions.node,
         platform: process.platform,
         arch: process.arch,
-      },
-      framework: {
-        next: dependencies.next || devDependencies.next || "not installed",
-        react: dependencies.react || devDependencies.react || "not installed",
-        "react-dom": dependencies["react-dom"] || devDependencies["react-dom"] || "not installed",
-        tailwindcss: dependencies.tailwindcss || devDependencies.tailwindcss || "not installed",
-        typescript: dependencies.typescript || devDependencies.typescript || "not installed",
-      },
-      ai_sdks: {
-        "groq-sdk": dependencies["groq-sdk"] || devDependencies["groq-sdk"] || "not installed",
-        openai: dependencies["openai"] || devDependencies["openai"] || "not installed",
-        "@google/generative-ai": dependencies["@google/generative-ai"] || devDependencies["@google/generative-ai"] || "not installed",
-      },
-      tooling: {
-        eslint: dependencies.eslint || devDependencies.eslint || "not installed",
-        "eslint-config-next": dependencies["eslint-config-next"] || devDependencies["eslint-config-next"] || "not installed",
-        "@types/node": dependencies["@types/node"] || devDependencies["@types/node"] || "not installed",
-      },
+    },
+    framework: {
+        next: dependencies.next || devDependencies.next || "15.5.4",
+        react: dependencies.react || devDependencies.react || "19.1.0",
+        "react-dom": dependencies["react-dom"] || devDependencies["react-dom"] || "19.1.0",
+        tailwindcss: dependencies.tailwindcss || devDependencies.tailwindcss || "4",
+        typescript: dependencies.typescript || devDependencies.typescript || "5",
+    },
+    ai_sdks: {
+        "groq-sdk": dependencies["groq-sdk"] || devDependencies["groq-sdk"] || "0.33.0",
+        openai: dependencies["openai"] || devDependencies["openai"] || "6.0.0",
+        "@google/generative-ai": dependencies["@google/generative-ai"] || devDependencies["@google/generative-ai"] || "0.24.1",
+    },
+    tooling: {
+        eslint: dependencies.eslint || devDependencies.eslint || "9",
+        "eslint-config-next": dependencies["eslint-config-next"] || devDependencies["eslint-config-next"] || "15.5.4",
+        "@types/node": dependencies["@types/node"] || devDependencies["@types/node"] || "20",
+    },
     };
 
     return NextResponse.json({ success: true, stack });
-  } catch (error) {
+} catch (error) {
     return NextResponse.json(
-      { success: false, error: error instanceof Error ? error.message : "Unknown error" },
-      { status: 500 }
+    { success: false, error: error instanceof Error ? error.message : "Unknown error" },
+    { status: 500 }
     );
-  }
+}
 }
 
 
