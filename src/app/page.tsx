@@ -1,5 +1,6 @@
 "use client";
 import { useState } from "react";
+import MessageRenderer from "./components/MessageRenderer";
 
 export default function Home() {
   const [input, setInput] = useState("");
@@ -104,13 +105,7 @@ export default function Home() {
       <div className="space-y-2">
         {messages.map((m, i) => (
           <div key={i} className="whitespace-pre-wrap">
-            {m.role === "user" ? (
-              `$ ${m.content}`
-            ) : m.role === "system" ? (
-              <span className="text-green-400">{`> ${m.content}`}</span>
-            ) : (
-              `> ${m.content}`
-            )}
+            <MessageRenderer content={m.content} role={m.role} />
           </div>
         ))}
       </div>
