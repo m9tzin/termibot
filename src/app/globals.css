@@ -24,3 +24,24 @@ body {
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
 }
+
+/* Estilos para LaTeX (KaTeX) no tema de terminal */
+.katex {
+  font-size: 1.1em;
+}
+
+.katex-display {
+  margin: 1em 0;
+}
+
+/* Ajustes para fórmulas inline */
+.markdown-content .katex {
+  color: #ffffff;
+}
+
+.markdown-content .katex-display {
+  background-color: rgba(31, 41, 55, 0.5);
+  padding: 0.5em;
+  border-radius: 0.25rem;
+  overflow-x: auto;
+}
